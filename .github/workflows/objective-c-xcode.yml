@@ -20,9 +20,6 @@ jobs:
           java-version: 11
       - name: Download Fortify ScanCentral Client
         uses: fortify/gha-setup-scancentral-client@v2
-      - name: Build Project
-      - name: Download Fortify ScanCentral Client
-        uses: fortify/gha-setup-scancentral-client@v1
       - name: Package Code + Dependencies
         run: scancentral package $PACKAGE_OPTS -o package.zip
         env:
