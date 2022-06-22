@@ -20,15 +20,6 @@ jobs:
           default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['targets'][0]")
           echo $default | cat >default
           echo Using default scheme: $default
-      - name: Build and Test
-        run: |
-          ls -al
-          pod install --repo-update --clean-install
-          ls -al
-          echo "destination=${destination}"
-          xcodebuild clean test -workspace "ExampleXcode.xcworkspace" -scheme examplexcode -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
-        env:
-         destination: ${{ matrix.destination }}
       - name: Zip Folder
         run: zip -r package.zip . -x "./.git/*"
       - name: Download Fortify on Demand Universal CI Tool
@@ -42,6 +33,6 @@ jobs:
           FOD_RELEASE_ID: ${{ secrets.FOD_RELEASE_ID }}
           FOD_URL: "https://sandbox.fortify.com/"
           FOD_API_URL: "https://api.sandbox.fortify.com/"
-          FOD_UPLOADER_OPTS: "-ep 2 -pp 0 -I 1"
+          FOD_UPLOADER_OPTS: "-ep 2 -pp 0"
           FOD_UPLOADER_NOTES: 'Triggered by GitHub Actions (${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})'
       
