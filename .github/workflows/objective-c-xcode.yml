@@ -21,7 +21,7 @@ jobs:
       - name: Download Fortify ScanCentral Client
         uses: fortify/gha-setup-scancentral-client@v2
       - name: Package Code + Dependencies
-        run: scancentral package -bt xcodebuild -o package.zip
+        run: scancentral package -bt  -o package.zip
         env:
           PACKAGE_OPTS: ""
       - name: Download Fortify on Demand Universal CI Tool
