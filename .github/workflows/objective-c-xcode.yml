@@ -14,12 +14,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Set Default Scheme
+      - name: Build Project
         run: |
-          scheme_list=$(xcodebuild -list -json | tr -d "\n")
-          default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['targets'][0]")
-          echo $default | cat >default
-          echo Using default scheme: $default
+          xcodebuild -project ExampleXcode.xcodeproj -scheme ExampleXcode -configuration "Debug" CODE_SIGN_IDENTITY="" CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO clean
+          echo Fin del xcodebuild
       - name: Zip Folder
         run: zip -r package.zip . -x "./.git/*"
       - name: Download Fortify on Demand Universal CI Tool
