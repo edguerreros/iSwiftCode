@@ -31,7 +31,7 @@ jobs:
       - name: Download Fortify on Demand Universal CI Tool
         uses: fortify/gha-setup-fod-uploader@v1
       - name: Perform SAST Scan
-        run: java -jar $FOD_UPLOAD_JAR -z package.zip -aurl $FOD_API_URL -purl $FOD_URL -rid 9386 -tc "FOD_BSI" -ac "7423b1c5-1af7-4c39-8628-6f692ab48be2" "VUpVejZobzZFdXFGQ1VyMzNIbDQlb0Mua0Zve3dh0" $FOD_UPLOADER_OPTS
+        run: java -jar $FOD_UPLOAD_JAR -z package.zip -aurl $FOD_API_URL -purl $FOD_URL -rid 9390 -tc "FOD_BSI" -ac "7423b1c5-1af7-4c39-8628-6f692ab48be2" "VUpVejZobzZFdXFGQ1VyMzNIbDQlb0Mua0Zve3dh0" $FOD_UPLOADER_OPTS
         env: 
           FOD_TENANT: ${{ secrets.FOD_TENANT }}  
           FOD_USER: ${{ secrets.FOD_USER }}
@@ -39,6 +39,6 @@ jobs:
           FOD_RELEASE_ID: ${{ secrets.FOD_RELEASE_ID }}
           FOD_URL: "https://sandbox.fortify.com/"
           FOD_API_URL: "https://api.sandbox.fortify.com/"
-          FOD_UPLOADER_OPTS: "-ep 2 -pp 0 -rp 2"
+          FOD_UPLOADER_OPTS: "-ep 2 -pp 0 -rp 2 -I 1"
           FOD_UPLOADER_NOTES: 'Triggered by GitHub Actions (${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})'
       
