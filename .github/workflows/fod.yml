@@ -81,7 +81,7 @@ jobs:
             build/test-results/**/*.trx
             build/test-results/**/*.json     
   Quality-Gate:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     if: ${{ always() }}
     needs: [ Build-And-Unit-Test ]
     steps:
