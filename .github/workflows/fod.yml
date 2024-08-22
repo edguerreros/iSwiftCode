@@ -70,16 +70,7 @@ jobs:
       - name: Build with xCode
         run: |
           xcodebuild -project ExampleXcode.xcodeproj -scheme ExampleXcode -configuration "Debug" CODE_SIGN_IDENTITY="" CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO clean
-          echo Fin del xcodebuild
-      # Publish test results
-      - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
-        with:
-          files: |
-            build/test-results/**/*.xml
-            build/test-results/**/*.trx
-            build/test-results/**/*.json     
+          echo Fin del xcodebuild  
   Quality-Gate:
     runs-on: ubuntu-latest
     if: ${{ always() }}
@@ -102,6 +93,10 @@ jobs:
         with:
           # Fetch at least the immediate parents so that if this is a pull request then we can checkout the head.
           fetch-depth: 2
+      - name: Build with xCode
+        run: |
+          xcodebuild -project ExampleXcode.xcodeproj -scheme ExampleXcode -configuration "Debug" CODE_SIGN_IDENTITY="" CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO clean
+          echo Fin del xcodebuild 
       - name: Fortify App and Release Name
         id: fortify-app-and-rel-name
         uses: edguerreros/github-actions/fortify-app-and-release-name@main
